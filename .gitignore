@@ -1,3 +1,8 @@
+# ----- Custom ignore -----
+**/ignore
+*.bat
+*.pdn
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
