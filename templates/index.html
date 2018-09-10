@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <title>Chart</title>
@@ -11,6 +10,8 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <!-- Sticky Footer -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/sticky_footer.css') }}">
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
   <main role="main" class="container">
@@ -20,26 +21,28 @@
             <h1 class="display-3 mx-5">Sensores real-time</h1>
           </div>
           <div class="row">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Descripción</th>
-                  <th scope="col">Valor</th>
-                </tr>
-              </thead>
-              <!-- Template : Si sensores NO está vacio, entonces escribo en la tabla (para evitar que se vean los binds en el renderizado) -->
-              <template v-if="!(sensores === undefined || sensores.length == 0)">
+            <!-- Template : Si sensores NO está vacio, entonces escribo en la tabla (para evitar que se vean los binds en el renderizado) -->
+            <template v-if="!(sensores === undefined || sensores.length == 0)">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Valor</th>
+                  </tr>
+                </thead>
+                
                 <tbody>
-                  <tr v-for="sensor in sensores">
+                  <tr v-for="(sensor, index) in sensores" :key="index">
                     <th scope="row">#[[sensor.id]]</th>
                     <td>[[sensor.descripcion]]</td>
                     <td>[[sensor.valor]]</td>
                   </tr>
                 </tbody>
-              </template>
-              <!-- Fin Template -->
-            </table>
+
+              </table>
+            </template>
+            <!-- Fin Template -->
           </div>
       </section>
     </div>
@@ -51,12 +54,11 @@
           <span class="text-muted">Made with ❤️ by Tomás Aprile.</span>
         </div>
         <div class="col">
-          <span class="text-muted">This repo in GitHub <a href="#"><i class="fab fa-github"></i></a></span>
+          <span class="text-muted">This project in GitHub <a href="https://github.com/Kraloz/ws-sensores"><i class="fab fa-github"></i></a></span>
         </div>
-        
       </div>
+    </div>
   </footer>
-  
 <!-- Importamos socket.io -->
 <script src="{{ url_for('static', filename='js/vendor/socket-io.js') }}"></script>
 <!-- Importamos Bootstrap -->
