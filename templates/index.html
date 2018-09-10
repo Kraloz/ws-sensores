@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chart</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <!-- Sticky Footer -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sticky_footer.css') }}">
+</head>
+<body>
+  <main role="main" class="container">
+    <div id="app">
+      <section>
+          <div class="row">
+            <h1 class="display-3 mx-5">Sensores real-time</h1>
+          </div>
+          <div class="row">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Valor</th>
+                </tr>
+              </thead>
+              <!-- Template : Si sensores NO está vacio, entonces escribo en la tabla (para evitar que se vean los binds en el renderizado) -->
+              <template v-if="!(sensores === undefined || sensores.length == 0)">
+                <tbody>
+                  <tr v-for="sensor in sensores">
+                    <th scope="row">#[[sensor.id]]</th>
+                    <td>[[sensor.descripcion]]</td>
+                    <td>[[sensor.valor]]</td>
+                  </tr>
+                </tbody>
+              </template>
+              <!-- Fin Template -->
+            </table>
+          </div>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <span class="text-muted">Made with ❤️ by Tomás Aprile.</span>
+        </div>
+        <div class="col">
+          <span class="text-muted">This repo in GitHub <a href="#"><i class="fab fa-github"></i></a></span>
+        </div>
+        
+      </div>
+  </footer>
+  
+<!-- Importamos socket.io -->
+<script src="{{ url_for('static', filename='js/vendor/socket-io.js') }}"></script>
+<!-- Importamos Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<!-- Importamos VueJS -->
+<script src="{{ url_for('static', filename='js/vendor/vue.js') }}"></script>
+<!-- Script de la app -->
+<script src="{{ url_for('static', filename='js/app_vue.js') }}"></script>
+</body>
+</html>
