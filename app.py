@@ -54,8 +54,13 @@ def json():
 
 """ Listeners """
 @socketio.on("connect")
-def test_connect():
+def on_connect():
     print("Client connected!")
+    socketio.emit("hola", {"hola": "quetalxd"})
+
+@socketio.on('message')
+def handle_message(message):
+    print('received message: ' + message)
 
 
 @socketio.on("selectAll")
@@ -69,6 +74,7 @@ def handle_selectAll():
 
     socketio.emit("respuestaSensores", {"sensores": output})
 
+"""
 @socketio.on("updateValue")
 def test_connect(json_data):
     #Defino el esquema
@@ -85,9 +91,10 @@ def test_connect(json_data):
     db.session.commit()   
     # llamo a la función que le actualiza los datos a los clientes 
     handle_selectAll()
+"""
 
 
 # Inicializamos el servidor
 if __name__ == '__main__':   
-    socketio.run(app)
+    socketio.run(app, host='0.0.0.0')
     # https://archive.codeplex.com/?p=nwsgi
